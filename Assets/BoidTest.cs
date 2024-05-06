@@ -19,11 +19,8 @@ public class LinkedList<T>
             first = n;
         }
     }
-    public void Remove(T item) {
-
-        // search the list until you find a node that has the same item
-        // remove this node from the list
-        // this will be either removefirst, remove last, or removing an element from the middle
+    public void Remove(T item) 
+    {
 
         Node current = first;
         Node prev = first;
@@ -33,12 +30,29 @@ public class LinkedList<T>
             if (current.item.Equals(item))
             {
                 // remove the item
-                first = current.next;
+                prev = current.previous;
+                prev.next = current.next;
+
+                current.next.previous = current.previous;
             }
             current = current.next;
         }
     }
 
+    public void RemoveFirst()
+    {
+        if (first is null)
+            return;
+
+        first = first.next;
+        first.previous = null;
+    }
+
+    public void RemoveLast()
+    {
+        last = last.previous;
+        last.next = null;
+    }
 
     private Node current;
     public T Reset()
